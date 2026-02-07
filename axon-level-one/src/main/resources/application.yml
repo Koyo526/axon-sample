@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: AxonLevelOne
+
+axon:
+  axonserver:
+    enabled: false
