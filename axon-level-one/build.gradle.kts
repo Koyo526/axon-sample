@@ -6,7 +6,7 @@ plugins {
 
 group = "com.example"
 version = "0.0.1-SNAPSHOT"
-description = "Demo project for Spring Boot"
+description = "Axon Level ONE - Chapter 4 最小構成サンプルコード"
 
 java {
 	toolchain {
@@ -19,6 +19,8 @@ repositories {
 }
 
 dependencies {
+	compileOnly("org.projectlombok:lombok")
+	annotationProcessor("org.projectlombok:lombok")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.axonframework:axon-spring-boot-starter:4.10.3") {
 		exclude(group = "org.axonframework", module = "axon-server-connector")

@@ -7,13 +7,11 @@ import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.axonframework.modelling.command.AggregateIdentifier;
 import org.axonframework.modelling.command.AggregateLifecycle;
 import org.axonframework.spring.stereotype.Aggregate;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Aggregate
 public class OrderAggregate {
-
-    private static final Logger log = LoggerFactory.getLogger(OrderAggregate.class);
 
     @AggregateIdentifier
     private String orderId;
