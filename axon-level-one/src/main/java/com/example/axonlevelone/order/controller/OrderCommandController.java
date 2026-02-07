@@ -1,12 +1,14 @@
 package com.example.axonlevelone.order.controller;
 
 import com.example.axonlevelone.order.command.CreateOrderCommand;
+import com.example.axonlevelone.order.controller.dto.CreateOrderRequest;
+import com.example.axonlevelone.order.controller.dto.CreateOrderResponse;
+import com.example.axonlevelone.order.controller.dto.OrderStatus;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Map;
 import java.util.UUID;
 
 @RestController
@@ -19,15 +21,11 @@ public class OrderCommandController {
     }
 
     @PostMapping("/orders")
-    public Map<String, String> createOrder(@RequestBody Map<String, String> request) {
+    public CreateOrderResponse createOrder(@RequestBody CreateOrderRequest request) {
         String orderId = UUID.randomUUID().toString();
-        String productName = request.get("productName");
 
-        commandGateway.sendAndWait(new CreateOrderCommand(orderId, productName));
+        commandGateway.sendAndWait(new CreateOrderCommand(orderId, request.productName()));
 
-        return Map.of(
-                "orderId", orderId,
-                "status", "CREATED"
-        );
+        return new CreateOrderResponse(orderId, OrderStatus.CREATED);
     }
 }
